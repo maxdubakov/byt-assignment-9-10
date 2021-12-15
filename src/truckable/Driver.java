@@ -1,8 +1,9 @@
 package truckable;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 
 public class Driver extends User {
 
@@ -11,6 +12,7 @@ public class Driver extends User {
     private final LocalDate dateOfBirth;
     private final List<License> licenses;
     private List<DriverVehicle> driverVehicles;
+    private List<ObtainingData> obtainingDataList;
 
     
 
@@ -20,6 +22,9 @@ public class Driver extends User {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.licenses = new ArrayList<>();
+    }
+    public void addObtainingData(ObtainingData obtainingData) {
+        this.obtainingDataList.add(obtainingData);
     }
   
     public List<DriverVehicle> getDriverVehicles() {
@@ -36,10 +41,7 @@ public class Driver extends User {
     public int addDriver(Driver driver) { return 1; }
 
     public int removeDriver(Driver driver) { return 1; }
-
-    /**
-     * GETTERS
-     */
+  
     public String getFirstName() {
         return firstName;
     }
@@ -48,6 +50,10 @@ public class Driver extends User {
         return lastName;
     }
 
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+  
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -55,10 +61,6 @@ public class Driver extends User {
     public List<License> getLicenses() {
         return licenses;
     }
-
-    /**
-     * SETTERS
-     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
