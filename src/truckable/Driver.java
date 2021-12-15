@@ -10,6 +10,9 @@ public class Driver extends User {
     private String lastName;
     private final LocalDate dateOfBirth;
     private final List<License> licenses;
+    private List<DriverVehicle> driverVehicles;
+
+    
 
     public Driver(Address address, String email, String password, String firstName, String lastName, LocalDate dateOfBirth) {
         super(address, email, password);
@@ -17,6 +20,13 @@ public class Driver extends User {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.licenses = new ArrayList<>();
+    }
+  
+    public List<DriverVehicle> getDriverVehicles() {
+        return driverVehicles;
+    }
+    public void addDriverVehicle(DriverVehicle driverVehicle) {
+        this.driverVehicles.add(driverVehicle);
     }
 
     public void monitor() { }
