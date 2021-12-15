@@ -4,36 +4,44 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Driver {
+
+public class Driver extends User {
+
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
-
+    private final LocalDate dateOfBirth;
+    private final List<License> licenses;
+    private List<DriverVehicle> driverVehicles;
     private List<ObtainingData> obtainingDataList;
 
-    public Driver(String firstName, String lastName, Date dateOfBirth) {
+    
+
+    public Driver(Address address, String email, String password, String firstName, String lastName, LocalDate dateOfBirth) {
+        super(address, email, password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-        obtainingDataList = new ArrayList<>();
+        this.licenses = new ArrayList<>();
     }
-
     public void addObtainingData(ObtainingData obtainingData) {
         this.obtainingDataList.add(obtainingData);
     }
-
-    public String monitor(){
-        return "Driver's location";
+  
+    public List<DriverVehicle> getDriverVehicles() {
+        return driverVehicles;
+    }
+    public void addDriverVehicle(DriverVehicle driverVehicle) {
+        this.driverVehicles.add(driverVehicle);
     }
 
-    public String reportOnAnomalyBehavior(){
-        return "Anomaly behavior is detected";
-    }
+    public void monitor() { }
 
-    public void addDriver(){}
+    public void reportOnAnomalyBehaviour() { }
 
-    public void deleteDriver(){}
+    public int addDriver(Driver driver) { return 1; }
 
+    public int removeDriver(Driver driver) { return 1; }
+  
     public String getFirstName() {
         return firstName;
     }
@@ -42,19 +50,22 @@ public class Driver {
         return lastName;
     }
 
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+  
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public List<License> getLicenses() {
+        return licenses;
+    }
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
     }
 }
