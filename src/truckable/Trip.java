@@ -5,21 +5,22 @@ import java.util.Date;
 import java.util.List;
 
 public class Trip {
-
     private int idTrip;
     private String tripName;
     private Date dateFrom; //dateFromTrip(?)
     private Date dateTo;
     private double duration;
     private final List<Route> routes;
+    private DriverVehicle driverVehicle;
 
-    public Trip(int idTrip, String tripName, Date dateFrom, Date dateTo, double duration){
+    public Trip(int idTrip, String tripName, Date dateFrom, Date dateTo, double duration, DriverVehicle driverVehicle){
         this.idTrip = idTrip;
         this.tripName = tripName;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.duration = duration;
         this.routes = new ArrayList<>();
+        this.driverVehicle = driverVehicle;
     }
 
     public String changeTripPlan(){
@@ -70,5 +71,13 @@ public class Trip {
 
     public List<Route> getRoutes() {
         return routes;
+    }
+
+    public DriverVehicle getDriverVehicle() {
+        return driverVehicle;
+    }
+
+    public void setDriverVehicle(DriverVehicle driverVehicle) {
+        this.driverVehicle = driverVehicle;
     }
 }
