@@ -1,23 +1,23 @@
 package truckable;
 
+import truckable.util.Helper;
+
 public class User {
-    private static int ID;
+    private final static Integer ID;
 
     private final int id;
     private Address address;
     private String email;
-    private String password;
 
 
     static {
         ID = 1;
     }
 
-    public User(Address address, String email, String password) {
-        this.id = getUniqueID();
+    public User(Address address, String email) {
+        this.id = Helper.getUniqueID(ID);
         this.address = address;
         this.email = email;
-        this.password = password;
     }
 
     public void signIn(Address address, String email, String password) { }
@@ -27,11 +27,6 @@ public class User {
     public void editData(Address newAddress, String newEmail, String password) { }
 
     public void sendMessage(String message) { }
-
-    private int getUniqueID() {
-        ID++;
-        return ID;
-    }
 
     /**
      * GETTERS
@@ -48,10 +43,6 @@ public class User {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
 
     /**
      * SETTERS
@@ -62,9 +53,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

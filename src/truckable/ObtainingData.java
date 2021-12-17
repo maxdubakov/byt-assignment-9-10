@@ -1,23 +1,26 @@
 package truckable;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.InputMismatchException;
-import java.util.Set;
+import truckable.util.Helper;
+
+import java.time.LocalDate;
 
 public class ObtainingData {
-    private int serialNumber;
-    private Date issueDate;
-    private Date expireDate;
+    private static final Integer ID;
+
+    private final int serialNumber;
+    private LocalDate issueDate;
+    private LocalDate expireDate;
     private String country;
 
-    private static Set<Integer> serialNumberSet = new HashSet<>();
+    private final License license;
+    private final Driver driver;
 
-    private License license;
-    private Driver driver;
+    static {
+        ID = 1;
+    }
 
-    public ObtainingData(int serialNumber, Date issueDate, Date expireDate, String country, License license, Driver driver){
-        this.serialNumber = checkSerialNumber(serialNumber);
+    public ObtainingData(LocalDate issueDate, LocalDate expireDate, String country, License license, Driver driver) {
+        this.serialNumber = Helper.getUniqueID(ID);
         this.issueDate = issueDate;
         this.expireDate = expireDate;
         this.country = country;
@@ -28,23 +31,18 @@ public class ObtainingData {
         driver.addObtainingData(this);
     }
 
-    private Integer checkSerialNumber(int serialNumber){
-        if(serialNumberSet.contains(serialNumber)){
-            serialNumberSet.add(serialNumber);
-            return serialNumber;
-        }
-        throw new InputMismatchException("Serial number already exists");
-    }
-
+    /**
+     * GETTERS
+     */
     public int getSerialNumber() {
         return serialNumber;
     }
 
-    public Date getIssueDate() {
+    public LocalDate getIssueDate() {
         return issueDate;
     }
 
-    public Date getExpireDate() {
+    public LocalDate getExpireDate() {
         return expireDate;
     }
 
@@ -52,15 +50,22 @@ public class ObtainingData {
         return country;
     }
 
-    public void setSerialNumber(int serialNumber) {
-        this.serialNumber = serialNumber;
+    public License getLicense() {
+        return license;
     }
 
-    public void setIssueDate(Date issueDate) {
+    public Driver getDriver() {
+        return driver;
+    }
+
+    /**
+     * SETTERS
+     */
+    public void setIssueDate(LocalDate issueDate) {
         this.issueDate = issueDate;
     }
 
-    public void setExpireDate(Date expireDate) {
+    public void setExpireDate(LocalDate expireDate) {
         this.expireDate = expireDate;
     }
 

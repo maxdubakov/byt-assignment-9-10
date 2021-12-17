@@ -12,8 +12,8 @@ public class Company extends User {
     private final List<Vehicle> vehicles;
     private final List<Driver> drivers;
 
-    public Company(Address address, String email, String password, String name) {
-        super(address, email, password);
+    public Company(Address address, String email, String name) {
+        super(address, email);
         this.name = name;
         this.trips = new ArrayList<>();
         this.vehicles = new ArrayList<>();
