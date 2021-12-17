@@ -1,5 +1,6 @@
 package truckable;
 
+import truckable.exceptions.InvalidDatesException;
 import truckable.util.Helper;
 
 import java.time.LocalDate;
@@ -19,7 +20,11 @@ public class ObtainingData {
         ID = 1;
     }
 
-    public ObtainingData(LocalDate issueDate, LocalDate expireDate, String country, License license, Driver driver) {
+    public ObtainingData(LocalDate issueDate, LocalDate expireDate, String country, License license, Driver driver) throws InvalidDatesException {
+        if (expireDate.isBefore(issueDate)) {
+            throw new InvalidDatesException();
+        }
+
         this.serialNumber = Helper.getUniqueID(ID);
         this.issueDate = issueDate;
         this.expireDate = expireDate;

@@ -5,22 +5,26 @@ import truckable.DriverVehicle;
 import truckable.License;
 import truckable.exceptions.RegistrationNumberAlreadyInUseException;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public abstract class Vehicle {
-    private static Set<String> registrationNumbers;
+    private static final Set<String> registrationNumbers;
 
     private final String registrationNumber;
     private String name;
-    private LocalDate yearOfProduction;
+    private Integer yearOfProduction;
     private License requiredLicenceType;
     private final List<DriverVehicle> driverVehicles;
     private Company company;
 
-    public Vehicle(String registrationNumber, String name, LocalDate yearOfProduction, License requiredLicenceType, Company company) throws RegistrationNumberAlreadyInUseException {
+    static {
+        registrationNumbers = new HashSet<>();
+    }
+
+    public Vehicle(String registrationNumber, String name, Integer yearOfProduction, License requiredLicenceType, Company company) throws RegistrationNumberAlreadyInUseException {
         this.registrationNumber = checkRegistrationNumber(registrationNumber);
         this.name = name;
         this.yearOfProduction = yearOfProduction;
@@ -56,7 +60,7 @@ public abstract class Vehicle {
         return name;
     }
 
-    public LocalDate getYearOfProduction() {
+    public Integer getYearOfProduction() {
         return yearOfProduction;
     }
 
@@ -79,7 +83,7 @@ public abstract class Vehicle {
         this.name = name;
     }
 
-    public void setYearOfProduction(LocalDate yearOfProduction) {
+    public void setYearOfProduction(Integer yearOfProduction) {
         this.yearOfProduction = yearOfProduction;
     }
 
