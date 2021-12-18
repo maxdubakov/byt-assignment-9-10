@@ -1,8 +1,11 @@
 package truckable;
 
+import truckable.exceptions.InvalidDatesException;
 import truckable.util.Helper;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +16,7 @@ public class Trip {
     private String tripName;
     private LocalDate dateFrom;
     private LocalDate dateTo;
-    private double duration;
+    private long duration; // in hours
     private final Map<Integer, Route> routes;
     private DriverVehicle driverVehicle;
     private Company company;
@@ -22,12 +25,16 @@ public class Trip {
         ID = 1;
     }
 
-    public Trip(String tripName, LocalDate dateFrom, LocalDate dateTo, double duration, DriverVehicle driverVehicle, Company company) {
+    public Trip(String tripName, LocalDate dateFrom, LocalDate dateTo, DriverVehicle driverVehicle, Company company) throws InvalidDatesException {
+        if (dateTo.isBefore(dateFrom)) {
+            throw new InvalidDatesException();
+        }
+
         this.idTrip = Helper.getUniqueID(ID);
         this.tripName = tripName;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
-        this.duration = duration;
+        this.duration = getDuration();
         this.routes = new HashMap<>();
         this.driverVehicle = driverVehicle;
         this.company = company;
@@ -67,8 +74,8 @@ public class Trip {
         return dateTo;
     }
 
-    public double getDuration() {
-        return duration;
+    public long getDuration() {
+        return ChronoUnit.DAYS.between(dateFrom, dateTo) * 24L;
     }
 
     public Map<Integer, Route> getRoutes() {
@@ -92,14 +99,16 @@ public class Trip {
 
     public void setDateFrom(LocalDate dateFrom) {
         this.dateFrom = dateFrom;
+        setDuration();
+    }
+
+    private void setDuration() {
+        this.duration = getDuration();
     }
 
     public void setDateTo(LocalDate dateTo) {
         this.dateTo = dateTo;
-    }
-
-    public void setDuration(double duration) {
-        this.duration = duration;
+        setDuration();
     }
 
     public void setDriverVehicle(DriverVehicle driverVehicle) {
