@@ -11,10 +11,9 @@ public class Address {
         this.apartment = apartment;
     }
 
-    /*
-     *GETTERS
+    /**
+     * GETTERS
      */
-
     public String getStreet() {
         return street;
     }
@@ -27,10 +26,9 @@ public class Address {
         return apartment;
     }
 
-    /*
-     *SETTERS
+    /**
+     * SETTERS
      */
-
     public void setStreet(String street) {
         this.street = street;
     }

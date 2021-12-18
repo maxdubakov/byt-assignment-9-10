@@ -10,7 +10,7 @@ public class License {
 
     private final List<ObtainingData> obtainingDataList;
 
-    public License(String type, String name){
+    public License(String type, String name) {
         this.type = type;
         this.name = name;
         obtainingDataList = new ArrayList<>();
